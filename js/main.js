@@ -192,7 +192,8 @@ class Game {
     if (hs.length + bots < 2) { this.toast('至少要2個人'); return; }
     const parts = hs.map(p => p.id);
     this.botInfo = new Map();
-    for (let i = 0; i < bots; i++) { const id = 'b' + i; this.botInfo.set(id, { id, name: botName(Math.floor(Math.random() * 40) + i * 3), look: randomLook(), bot: true, skill: 0.45 + Math.random() * 0.55 }); parts.push(id); }
+    const names = shuffle([...Array(60).keys()]);
+    for (let i = 0; i < bots; i++) { const id = 'b' + i; this.botInfo.set(id, { id, name: botName(names[i]), look: randomLook(), bot: true, skill: 0.45 + Math.random() * 0.55 }); parts.push(id); }
     this.show = { alive: parts, played: 0, pool: shuffle([...RACES, ...SURVIVALS]) };
     this.hostRound();
   }
